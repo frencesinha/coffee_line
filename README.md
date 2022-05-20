@@ -2,7 +2,7 @@
 
 A starter pack to get started with building dapps on Celo.
 
-You can view a live version of the template deployed at https://celo-progressive-dapp-starter.netlify.app/.
+You can view a live version of the template deployed at https://coffee_line.netlify.app/.
 
 This repo is heavily inspired by [scaffold-eth](https://github.com/scaffold-eth/scaffold-eth).
 
@@ -13,7 +13,7 @@ Prerequisites:
 3. Git
 
 ```shell
-git clone https://github.com/celo-org/celo-progressive-dapp-starter
+git clone https://github.com/celo-org/coffee_line
 ```
 
 ## Intro Video
@@ -25,7 +25,7 @@ git clone https://github.com/celo-org/celo-progressive-dapp-starter
 ### Set the correct node version (several Celo packages require using node version 12.x):
 
 ```shell
-cd celo-progressive-dapp-starter
+cd coffee_line
 nvm use # uses node v12 as specified in .nvmrc
 ```
 
@@ -132,7 +132,7 @@ If you improve the user interface or create new components that you think might 
 
 We will happily compensate you for contributions. Anywhere between 5 and 50 cUSD (or more) depending on the work. This is dependent on the work that is done and is ultimately up to the discretion of the Celo Foundation developer relations team.
 
-You can view the associated bounty on Gitcoin [here](https://gitcoin.co/issue/celo-org/celo-progressive-dapp-starter/17/100028587).
+You can view the associated bounty on Gitcoin [here](https://gitcoin.co/issue/celo-org/coffee_line/17/100028587).
 
 ## How to Contribute a new dApp
 

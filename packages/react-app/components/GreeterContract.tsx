@@ -1,18 +1,18 @@
-import * as React from "react";
-import { Box, Button, Divider, Grid, Typography, Link } from "@mui/material";
+import * as React from 'react';
+import { Box, Button, Divider, Grid, Typography, Link } from '@mui/material';
 
-import { useInput } from "@/hooks/useInput";
-import { useContractKit } from "@celo-tools/use-contractkit";
-import { useEffect, useState } from "react";
-import { SnackbarAction, SnackbarKey, useSnackbar } from "notistack";
-import { truncateAddress } from "@/utils";
-import { Greeter } from "@celo-progressive-dapp-starter/hardhat/types/Greeter";
+import { useInput } from '@/hooks/useInput';
+import { useContractKit } from '@celo-tools/use-contractkit';
+import { useEffect, useState } from 'react';
+import { SnackbarAction, SnackbarKey, useSnackbar } from 'notistack';
+import { truncateAddress } from '@/utils';
+import { Greeter } from '@coffee_line/hardhat/types/Greeter';
 
 export function GreeterContract({ contractData }) {
   const { kit, address, network, performActions } = useContractKit();
   const [greeterValue, setGreeterValue] = useState<string | null>(null);
-  const [greeterInput, setGreeterInput] = useInput({ type: "text" });
-  const [contractLink, setContractLink] = useState<string>("");
+  const [greeterInput, setGreeterInput] = useInput({ type: 'text' });
+  const [contractLink, setContractLink] = useState<string>('');
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const contract = contractData
@@ -42,11 +42,11 @@ export function GreeterContract({ contractData }) {
 
         console.log(result);
 
-        const variant = result.status == true ? "success" : "error";
+        const variant = result.status == true ? 'success' : 'error';
         const url = `${network.explorer}/tx/${result.transactionHash}`;
         const action: SnackbarAction = (key) => (
           <>
-            <Link href={url} target="_blank">
+            <Link href={url} target='_blank'>
               View in Explorer
             </Link>
             <Button
@@ -58,13 +58,13 @@ export function GreeterContract({ contractData }) {
             </Button>
           </>
         );
-        enqueueSnackbar("Transaction processed", {
+        enqueueSnackbar('Transaction processed', {
           variant,
           action,
         });
       });
     } catch (e) {
-      enqueueSnackbar(e.message, {variant: 'error'});
+      enqueueSnackbar(e.message, { variant: 'error' });
       console.log(e);
     }
   };
@@ -79,11 +79,11 @@ export function GreeterContract({ contractData }) {
   };
 
   return (
-    <Grid sx={{ m: 1 }} container justifyContent="center">
+    <Grid sx={{ m: 1 }} container justifyContent='center'>
       <Grid item sm={6} xs={12} sx={{ m: 2 }}>
-        <Typography variant="h5">Greeter Contract:</Typography>
+        <Typography variant='h5'>Greeter Contract:</Typography>
         {contractData ? (
-          <Link href={contractLink} target="_blank">
+          <Link href={contractLink} target='_blank'>
             {truncateAddress(contractData?.address)}
           </Link>
         ) : (
@@ -91,18 +91,26 @@ export function GreeterContract({ contractData }) {
         )}
         <Divider sx={{ m: 1 }} />
 
-        <Typography variant="h6">Write Contract</Typography>
+        <Typography variant='h6'>Write Contract</Typography>
         <Box sx={{ m: 1, marginLeft: 0 }}>{setGreeterInput}</Box>
-        <Button sx={{ m: 1, marginLeft: 0 }} variant="contained" onClick={setGreeter}>
+        <Button
+          sx={{ m: 1, marginLeft: 0 }}
+          variant='contained'
+          onClick={setGreeter}
+        >
           Update Greeter Contract
         </Button>
         <Divider sx={{ m: 1 }} />
 
-        <Typography variant="h6">Read Contract</Typography>
-        <Typography sx={{ m: 1, marginLeft: 0, wordWrap: "break-word" }}>
+        <Typography variant='h6'>Read Contract</Typography>
+        <Typography sx={{ m: 1, marginLeft: 0, wordWrap: 'break-word' }}>
           Greeter Contract Value: {greeterValue}
         </Typography>
-        <Button sx={{ m: 1, marginLeft: 0 }} variant="contained" onClick={getGreeter}>
+        <Button
+          sx={{ m: 1, marginLeft: 0 }}
+          variant='contained'
+          onClick={getGreeter}
+        >
           Read Greeter Contract
         </Button>
       </Grid>
