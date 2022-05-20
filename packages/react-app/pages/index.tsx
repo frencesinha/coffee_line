@@ -7,6 +7,7 @@ import {
   GreeterContract,
   AccountInfo,
   Polling,
+  Scan,
 } from '@/components';
 import AppLayout from '@/components/layout/AppLayout';
 
@@ -41,18 +42,22 @@ export default function App() {
             onChange={handleChange}
             aria-label='basic tabs'
           >
-            <Tab label='Account' {...a11yProps(0)} />
-            <Tab label='Storage' {...a11yProps(1)} />
-            <Tab label='Greeter' {...a11yProps(2)} />
+            <Tab label='Scan' {...a11yProps(0)} />
+            <Tab label='Account' {...a11yProps(1)} />
+            <Tab label='Storage' {...a11yProps(2)} />
+            <Tab label='Greeter' {...a11yProps(3)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <AccountInfo></AccountInfo>
+          <Scan></Scan>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <StorageContract contractData={contracts?.Storage} />
+          <AccountInfo></AccountInfo>
         </TabPanel>
         <TabPanel value={value} index={2}>
+          <StorageContract contractData={contracts?.Storage} />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
           <GreeterContract contractData={contracts?.Greeter} />
         </TabPanel>
       </Box>
