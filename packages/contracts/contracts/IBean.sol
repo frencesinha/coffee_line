@@ -6,14 +6,6 @@ interface IBean {
   /// Enums
   ///
 
-  enum Timeline {
-    CREATED,
-    GRADED,
-    ONSALE,
-    ACQUIRED,
-    ROASTED
-  }
-
   enum Grades {
     SPECIALTY,
     PREMIUM,
@@ -24,8 +16,26 @@ interface IBean {
   /// Structs
   ///
 
-  struct Grade {
-    Grades grade;
-    string image;
+  struct Timeline {
+    uint256 creationDate;
+    uint256 sellDate;
+    uint256 acquisitionDate;
+  }
+
+  struct SaleDetails {
+    SellPosition sellPosition;
+    Acquisition acquisition;
+  }
+
+  struct Acquisition {
+    uint256 amount;
+    uint256 timestamp;
+  }
+
+  struct SellPosition {
+    uint256 weightInKg;
+    address roaster;
+    bool sold;
+    uint256 timestamp;
   }
 }

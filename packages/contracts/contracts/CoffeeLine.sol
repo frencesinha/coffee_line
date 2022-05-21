@@ -59,11 +59,13 @@ contract CoffeeLine is ICoffeeLine {
       require(!_producerExists(), "Producer does not exist");
 
       bean = new Bean(
+        msg.sender,
         _params.coffeeBean,
         _params.process,
         _params.varietal,
         _params.weightInKg,
-        _params.harvestDate
+        _params.harvestDate,
+        this
       );
 
       producers[msg.sender].beans.push(bean);
