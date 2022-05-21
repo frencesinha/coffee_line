@@ -14,6 +14,8 @@ contract Bean is IBean {
     uint256 weightInKg;
     string harvestDate;
 
+    Timeline timeline;
+
     uint256 creationDate;
 
     ///
@@ -32,6 +34,8 @@ contract Bean is IBean {
         varietal = _varietal;
         weightInKg = _weightInKg;
         harvestDate = _harvestDate;
+
+        timeline = Timeline.CREATED;
 
         creationDate = block.timestamp;
     }

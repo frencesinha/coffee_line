@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./ICoffeeLine.sol";
+import "./Bean.sol";
 
 contract CoffeeLine is ICoffeeLine {
     ///
@@ -30,7 +31,7 @@ contract CoffeeLine is ICoffeeLine {
         require(_producerExists(), "Producer already exists");
 
         string[] memory images;
-        IBean[] memory beans;
+        Bean[] memory beans;
 
         producer = Producer({
             name: _params.name,
@@ -53,8 +54,20 @@ contract CoffeeLine is ICoffeeLine {
     function createBean(BeanParams calldata _params)
         external
         override(ICoffeeLine)
-        returns (IBean bean)
-    {}
+        returns (Bean bean)
+    {
+      require(!_producerExists(), "Producer does not exist");
+
+      bean = new Bean(
+        _params.coffeeBean,
+        _params.process,
+        _params.varietal,
+        _params.weightInKg,
+        _params.harvestDate
+      );
+
+      producers[msg.sender].beans.push(bean);
+    }
 
     function createRoaster(RoasterParams calldata _params)
         external
@@ -63,7 +76,7 @@ contract CoffeeLine is ICoffeeLine {
     {
         require(_roasterExists(), "Roaster already exists");
 
-        IBean[] memory beans;
+        Bean[] memory beans;
 
         roaster = Roaster({
             companyName: _params.companyName,

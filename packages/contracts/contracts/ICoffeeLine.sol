@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "./IBean.sol";
+import "./Bean.sol";
 
 interface ICoffeeLine {
     ///
@@ -34,7 +34,7 @@ interface ICoffeeLine {
         uint256 numberOfPeople;
         string description;
         string[] images;
-        IBean[] beans;
+        Bean[] beans;
     }
 
     struct BeanParams {
@@ -65,7 +65,7 @@ interface ICoffeeLine {
         string equipment;
         string description;
         string image;
-        IBean[] beans;
+        Bean[] beans;
     }
 
     ///
@@ -76,7 +76,7 @@ interface ICoffeeLine {
         external
         returns (Producer memory);
 
-    function createBean(BeanParams calldata _bean) external returns (IBean);
+    function createBean(BeanParams calldata _bean) external returns (Bean);
 
     function createRoaster(RoasterParams calldata _bean)
         external
