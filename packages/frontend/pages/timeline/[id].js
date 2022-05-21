@@ -1,20 +1,22 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
 
-function App() {
+function Timeline() {
+  const router = useRouter();
+  // TODO: Use ID to get timeline from blockchain
+  const { id } = router.query;
   const { address, connect } = useContractKit();
 
   return (
     <>
       <Head>
-        <title>Coffeeline</title>
+        <title>Timeline</title>
       </Head>
-
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
@@ -78,23 +80,81 @@ function App() {
           </div>
         </nav>
 
-        <section id='intro'>
-          <h2 className='lora'>
-            Check the <span>history</span> of your special coffee.
-          </h2>
+        <section className='main'>
+          <h2 className='lora'>Tropical - Kenya</h2>
 
-          <Link href='/scan'>
-            <div className='scan' />
-          </Link>
+          <div className='box'>
+            <div className='container_text_box'>
+              <p className='small-caption'>Type</p>
+              <p>Single origin</p>
+            </div>
+          </div>
 
-          <p className='small-caption'>Scan QR code</p>
+          <div className='box'>
+            <div className='container_text_box'>
+              <p className='small-caption'>Producer</p>
+              <a href='#'>
+                <p>Ndumba Embu (PB)</p>
+              </a>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Country</p>
+              <p>Kenya</p>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Altitude</p>
+              <p>1600 masl</p>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Process</p>
+              <p>Washed</p>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Varietal</p>
+              <p>SL 28, Ruiru 11</p>
+            </div>
+          </div>
+
+          <div className='box'>
+            <div className='container_text_box'>
+              <p className='small-caption'>SCA Grade</p>
+              <p>Specialty Grade</p>
+            </div>
+          </div>
+
+          <div className='box'>
+            <div className='container_text_box'>
+              <p className='small-caption'>Roaster</p>
+              <a href='#'>
+                <p>Tropical Coffee Roasters</p>
+              </a>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Roast type</p>
+              <p>Light roasted</p>
+            </div>
+
+            <div className='container_text_box'>
+              <p className='small-caption'>Roast date</p>
+              <p>20/05/2022</p>
+            </div>
+          </div>
+
+          <button className='primary-button'>
+            <h3>Rate coffee</h3>
+          </button>
         </section>
       </div>
     </>
   );
 }
 
-function WrappedApp() {
+function WrappedTimeline() {
   return (
     <ContractKitProvider
       dapp={{
@@ -103,8 +163,8 @@ function WrappedApp() {
         url: 'https://example.com',
       }}
     >
-      <App />
+      <Timeline />
     </ContractKitProvider>
   );
 }
-export default WrappedApp;
+export default WrappedTimeline;

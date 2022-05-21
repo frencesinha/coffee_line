@@ -17,7 +17,7 @@ function Scan() {
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
-            <a href='index.html' className='logo'>
+            <a href='/' className='logo'>
               <Image alt='Coffeline' src='/logo.svg' width={100} height={40} />
             </a>
 
