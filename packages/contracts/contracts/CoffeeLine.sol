@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./ICoffeeLine.sol";
 import "./Bean.sol";
+import "./IBean.sol";
 
 contract CoffeeLine is ICoffeeLine {
     ///
@@ -28,7 +29,7 @@ contract CoffeeLine is ICoffeeLine {
         override(ICoffeeLine)
         returns (Producer memory producer)
     {
-        require(_producerExists(), "Producer already exists");
+        require(!_producerExists(), "Producer already exists");
 
         string[] memory images;
         Bean[] memory beans;
@@ -56,19 +57,19 @@ contract CoffeeLine is ICoffeeLine {
         override(ICoffeeLine)
         returns (Bean bean)
     {
-      require(!_producerExists(), "Producer does not exist");
+        require(!_producerExists(), "Producer does not exist");
 
-      bean = new Bean(
-        msg.sender,
-        _params.coffeeBean,
-        _params.process,
-        _params.varietal,
-        _params.weightInKg,
-        _params.harvestDate,
-        this
-      );
+        bean = new Bean(
+            msg.sender,
+            _params.coffeeBean,
+            _params.process,
+            _params.varietal,
+            _params.weightInKg,
+            _params.harvestDate,
+            this
+        );
 
-      producers[msg.sender].beans.push(bean);
+        producers[msg.sender].beans.push(bean);
     }
 
     function createRoaster(RoasterParams calldata _params)
@@ -76,9 +77,10 @@ contract CoffeeLine is ICoffeeLine {
         override(ICoffeeLine)
         returns (Roaster memory roaster)
     {
-        require(_roasterExists(), "Roaster already exists");
+        require(!_roasterExists(msg.sender), "Roaster already exists");
 
         Bean[] memory beans;
+        Coffee[] memory coffees;
 
         roaster = Roaster({
             companyName: _params.companyName,
@@ -89,10 +91,31 @@ contract CoffeeLine is ICoffeeLine {
             equipment: _params.equipment,
             description: _params.description,
             image: _params.image,
-            beans: beans
+            beans: beans,
+            coffees: coffees
         });
 
         roasters[msg.sender] = roaster;
+    }
+
+    function acquireBean(Bean _bean) external {
+        require(_roasterExists(tx.origin), "Roaster does not exist");
+
+        roasters[tx.origin].beans.push(_bean);
+    }
+
+    function roast(RoastParams calldata _params) external {
+        require(_roasterExists(msg.sender), "Roaster does not exist");
+
+        uint256 beansLength = roasters[msg.sender].beans.length;
+
+        for (uint256 index = 0; index < beansLength; index++) {
+          if (_params.bean == roasters[msg.sender].beans[index]) {
+            Coffee coffee = new Coffee(_params, msg.sender);
+            roasters[msg.sender].coffees.push(coffee);
+            break;
+          }
+        }
     }
 
     ///
@@ -103,7 +126,7 @@ contract CoffeeLine is ICoffeeLine {
         return bytes(producers[msg.sender].name).length > 0;
     }
 
-    function _roasterExists() private view returns (bool) {
-        return bytes(roasters[msg.sender].companyName).length > 0;
+    function _roasterExists(address _roaster) private view returns (bool) {
+        return bytes(roasters[_roaster].companyName).length > 0;
     }
 }

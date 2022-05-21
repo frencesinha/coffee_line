@@ -2,6 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "./Bean.sol";
+import "./IBean.sol";
+import "./ICoffee.sol";
+import "./Coffee.sol";
 
 interface ICoffeeLine {
     ///
@@ -66,6 +69,14 @@ interface ICoffeeLine {
         string description;
         string image;
         Bean[] beans;
+        Coffee[] coffees;
+    }
+
+    struct RoastParams {
+        string coffeeName;
+        ICoffee.Origin originType;
+        Bean bean;
+        ICoffee.RoastType roastType;
     }
 
     ///

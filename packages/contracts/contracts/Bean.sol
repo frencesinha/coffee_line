@@ -37,6 +37,11 @@ contract Bean is IBean {
         string memory _harvestDate,
         CoffeeLine _coffeeLine
     ) {
+        require(
+            address(_coffeeLine) != address(0x0),
+            "CoffeeLine should be a valid address"
+        );
+
         producer = _producer;
 
         coffeeBean = _coffeeBean;
@@ -56,51 +61,66 @@ contract Bean is IBean {
     ///
 
     function sellTo(address _to, uint256 _amount) external {
-      require(msg.sender == producer, "Only the producer can sell its Bean");
-      require(_amount > 0, "The amount should be significant");
-      require(_amount <= remainderWeightInKg, "The remainder amount is less than the selling amount");
+        require(msg.sender == producer, "Only the producer can sell its Bean");
+        require(_amount > 0, "The amount should be significant");
+        require(
+            _amount <= remainderWeightInKg,
+            "The remainder amount is less than the selling amount"
+        );
 
-      SellPosition memory position = SellPosition({
-        weightInKg: _amount,
-        roaster: _to,
-        sold: false,
-        timestamp: block.timestamp
-      });
+        SellPosition memory position = SellPosition({
+            weightInKg: _amount,
+            roaster: _to,
+            sold: false,
+            timestamp: block.timestamp
+        });
 
-      sales[_to].sellPosition = position;
+        sales[_to].sellPosition = position;
 
-      remainderWeightInKg -= _amount;
+        remainderWeightInKg -= _amount;
     }
 
     function acquireBean(uint256 _amount) external {
-      require(_amount > 0, "The payable amount should be greater than 0");
-      require(sales[msg.sender].sellPosition.weightInKg > 0, "Sell Position does not exist");
-      require(!sales[msg.sender].sellPosition.sold, "Position is already sold");
+        require(_amount > 0, "The payable amount should be greater than 0");
+        require(
+            sales[msg.sender].sellPosition.weightInKg > 0,
+            "Sell Position does not exist"
+        );
+        require(
+            !sales[msg.sender].sellPosition.sold,
+            "Position is already sold"
+        );
 
-      Acquisition memory acquisition = Acquisition({
-        amount: _amount,
-        timestamp: block.timestamp
-      });
+        Acquisition memory acquisition = Acquisition({
+            amount: _amount,
+            timestamp: block.timestamp
+        });
 
-      sales[msg.sender].acquisition = acquisition;
+        sales[msg.sender].acquisition = acquisition;
 
-      SellPosition storage position = sales[msg.sender].sellPosition;
-      position.sold = true;
+        SellPosition storage position = sales[msg.sender].sellPosition;
+        position.sold = true;
     }
 
-    function getTimeline() external view returns(Timeline memory) {
-      return Timeline({
-        creationDate: creationDate,
-        sellDate: 0,
-        acquisitionDate: 0
-      });
+    function getTimeline() external view returns (Timeline memory) {
+        return
+            Timeline({
+                creationDate: creationDate,
+                sellDate: 0,
+                acquisitionDate: 0
+            });
     }
 
-    function getTimeline(address _roaster) external view returns(Timeline memory) {
-      return Timeline({
-        creationDate: creationDate,
-        sellDate: sales[_roaster].sellPosition.timestamp,
-        acquisitionDate: sales[_roaster].acquisition.timestamp
-      });
+    function getTimeline(address _roaster)
+        external
+        view
+        returns (Timeline memory)
+    {
+        return
+            Timeline({
+                creationDate: creationDate,
+                sellDate: sales[_roaster].sellPosition.timestamp,
+                acquisitionDate: sales[_roaster].acquisition.timestamp
+            });
     }
 }
