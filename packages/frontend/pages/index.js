@@ -7,7 +7,7 @@ import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
 
 function App() {
-  const { address, connect } = useContractKit();
+  const { address, connect, destroy } = useContractKit();
 
   return (
     <>
@@ -18,9 +18,9 @@ function App() {
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
-            <a href='/' className='logo'>
+            <Link href='/' className='logo'>
               <Image alt='Coffeline' src='/logo.svg' width={100} height={40} />
-            </a>
+            </Link>
 
             <button
               className='navbar-toggler'
@@ -65,14 +65,27 @@ function App() {
 
                 <div className='line'></div>
 
-                <a onClick={connect}>
-                  <button
-                    data-bs-dismiss='offcanvas'
-                    className='primary-button'
-                  >
-                    <h3>Connect wallet</h3>
-                  </button>
-                </a>
+                <>
+                  {!address && (
+                    <button
+                      onClick={() => connect().catch((e) => console.log(e))}
+                      data-bs-dismiss='offcanvas'
+                      className='primary-button'
+                    >
+                      Connect Wallet
+                    </button>
+                  )}
+
+                  {address && (
+                    <button
+                      onClick={() => destroy().catch((e) => console.log(e))}
+                      data-bs-dismiss='offcanvas'
+                      className='secondary-button'
+                    >
+                      Disconnect
+                    </button>
+                  )}
+                </>
               </div>
             </div>
           </div>

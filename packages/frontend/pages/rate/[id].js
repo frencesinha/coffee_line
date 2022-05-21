@@ -7,16 +7,17 @@ import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
 
-function Timeline() {
+function Rate() {
   const router = useRouter();
-  // TODO: Use ID to get timeline from blockchain
+  // TODO: Use ID to post Rate to blockchain
+  // if user already has a rate, populate with existing
   const { id } = router.query;
   const { address, connect, destroy } = useContractKit();
 
   return (
     <>
       <Head>
-        <title>Timeline</title>
+        <title>Rate</title>
       </Head>
       <div className='container'>
         <nav className='navbar fixed-top'>
@@ -94,71 +95,10 @@ function Timeline() {
           </div>
         </nav>
 
-        <section className='main'>
-          <h2 className='lora'>Tropical - Kenya</h2>
-
-          <div className='box'>
-            <div className='container_text_box'>
-              <p className='small-caption'>Type</p>
-              <p>Single origin</p>
-            </div>
-          </div>
-
-          <div className='box'>
-            <div className='container_text_box'>
-              <p className='small-caption'>Producer</p>
-              <a href='#'>
-                <p>Ndumba Embu (PB)</p>
-              </a>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Country</p>
-              <p>Kenya</p>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Altitude</p>
-              <p>1600 masl</p>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Process</p>
-              <p>Washed</p>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Varietal</p>
-              <p>SL 28, Ruiru 11</p>
-            </div>
-          </div>
-
-          <div className='box'>
-            <div className='container_text_box'>
-              <p className='small-caption'>SCA Grade</p>
-              <p>Specialty Grade</p>
-            </div>
-          </div>
-
-          <div className='box'>
-            <div className='container_text_box'>
-              <p className='small-caption'>Roaster</p>
-              <a href='#'>
-                <p>Tropical Coffee Roasters</p>
-              </a>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Roast type</p>
-              <p>Light roasted</p>
-            </div>
-
-            <div className='container_text_box'>
-              <p className='small-caption'>Roast date</p>
-              <p>20/05/2022</p>
-            </div>
-          </div>
-
+        <section class='main'>
+          <h2 class='lora'>Rate coffee</h2>
+          <p class='name'>Coffee name</p>
+          <RateSubjects />
           {!address && (
             <button
               onClick={() => connect().catch((e) => console.log(e))}
@@ -170,7 +110,7 @@ function Timeline() {
 
           {address && (
             <Link href={'/rate/' + id}>
-              <button className='primary-button'>Rate coffee</button>
+              <button className='primary-button'>Submit Rate</button>
             </Link>
           )}
         </section>
@@ -179,7 +119,21 @@ function Timeline() {
   );
 }
 
-function WrappedTimeline() {
+function RateSubjects() {
+  const subjects = ['Aroma', 'Acidity', 'Body', 'Flavor', 'Aftertaste'];
+  return subjects.map((subject) => (
+    <div class='box'>
+      <div class='container_text_box'>
+        <p>{subject}</p>
+        <i class='bi bi-star'></i>
+        <i class='bi bi-star'></i>
+        <i class='bi bi-star'></i>
+      </div>
+    </div>
+  ));
+}
+
+function WrappedRate() {
   return (
     <ContractKitProvider
       dapp={{
@@ -188,8 +142,8 @@ function WrappedTimeline() {
         url: 'https://example.com',
       }}
     >
-      <Timeline />
+      <Rate />
     </ContractKitProvider>
   );
 }
-export default WrappedTimeline;
+export default WrappedRate;

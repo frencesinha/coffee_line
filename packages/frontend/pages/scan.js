@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 import { QrReader } from 'react-qr-reader';
 import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
@@ -17,9 +18,9 @@ function Scan() {
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
-            <a href='/' className='logo'>
+            <Link href='/' className='logo'>
               <Image alt='Coffeline' src='/logo.svg' width={100} height={40} />
-            </a>
+            </Link>
 
             <button
               className='navbar-toggler'
