@@ -95,9 +95,9 @@ function Rate() {
           </div>
         </nav>
 
-        <section class='main'>
-          <h2 class='lora'>Rate coffee</h2>
-          <p class='name'>Coffee name</p>
+        <section className='main'>
+          <h2 className='lora'>Rate coffee</h2>
+          <p className='name'>Coffee name</p>
           <RateSubjects />
           {!address && (
             <button
@@ -122,12 +122,14 @@ function Rate() {
 function RateSubjects() {
   const subjects = ['Aroma', 'Acidity', 'Body', 'Flavor', 'Aftertaste'];
   return subjects.map((subject) => (
-    <div class='box'>
-      <div class='container_text_box'>
+    <div className='box'>
+      <div className='container_text_box'>
         <p>{subject}</p>
-        <i class='bi bi-star'></i>
-        <i class='bi bi-star'></i>
-        <i class='bi bi-star'></i>
+        <i className='bi bi-star'></i>
+        <i className='bi bi-star'></i>
+        <i className='bi bi-star'></i>
+        <i className='bi bi-star'></i>
+        <i className='bi bi-star'></i>
       </div>
     </div>
   ));

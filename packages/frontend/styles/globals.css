@@ -369,3 +369,62 @@ nav .hamb-menu {
 .container-flex .primary-button {
   margin: 0;
 }
+
+.container_text_box .line {
+  margin: 22px 0 22px 0;
+}
+
+.p-grey {
+  color: var(--grey1);
+}
+
+#container-search form {
+  margin: 12px 0 32px 0;
+}
+
+#basic-addon1 {
+  background-color: var(--offwhite);
+  border-radius: 6px 0 0 6px;
+  border: 0;
+  height: 38px;
+}
+
+.form-control {
+  border-left: 0;
+  background-color: var(--offwhite);
+  border-radius: 0 6px 6px 0;
+  border: 0;
+}
+
+.input-group-text svg {
+  fill: var(--grey1);
+}
+
+.id {
+  font-weight: 700;
+}
+
+.form-info .form-control {
+  border-radius: 6px;
+  border: 1px solid var(--grey2);
+  background-color: white;
+}
+
+.form-info .form-group {
+  margin-bottom: 22px;
+}
+
+.form-info label {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--grey1);
+  font-weight: normal;
+  padding-bottom: 6px;
+}
+
+#upload {
+  margin: 64px 0 0 0;
+  color: var(--orange1);
+  font-size: 16px;
+  padding: 0;
+}
