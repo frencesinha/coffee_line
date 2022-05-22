@@ -160,7 +160,7 @@ p {
 }
 
 #intro .scan {
-  background-image: url(scan-intro.svg);
+  background-image: url(../public/scan-intro.svg);
   width: 90px;
   height: 90px;
   margin: 128px auto 22px auto;

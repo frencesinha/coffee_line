@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
@@ -19,9 +20,9 @@ function CoffeeNew() {
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
-            <a href='/' className='logo'>
+            <Link href='/' className='logo'>
               <img src='logo.svg' alt='Coffeline' width={100} height={40} />
-            </a>
+            </Link>
 
             <button
               className='navbar-toggler'
@@ -200,9 +201,9 @@ function CoffeeNew() {
 
           {address && (
             // TODO: This link should redirect to the newly created coffee qr code
-            <a href={'/qr/' + id}>
+            <Link href={'/qr/' + id}>
               <button className='primary-button col-12'>Submit</button>
-            </a>
+            </Link>
           )}
         </section>
       </div>
