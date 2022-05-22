@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import Script from 'next/script';
 import Head from 'next/head';
-import '../styles/globals.css';
+import '../public/globals.css';
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +12,7 @@ export default function MyApp({ Component, pageProps }) {
           integrity='sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor'
           crossOrigin='anonymous'
         />
-        <link rel='icon' type='image/x-icon' href='/favicon.png' />
+        <link rel='icon' type='image/x-icon' href='favicon.png' />
       </Head>
       <Script
         src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'

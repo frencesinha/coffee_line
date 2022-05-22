@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContractKit } from '@celo-tools/use-contractkit';
@@ -23,7 +22,7 @@ function Intro() {
         <nav className='navbar fixed-top'>
           <div className='container'>
             <Link href='/' className='logo'>
-              <Image alt='Coffeline' src='/logo.svg' width={100} height={40} />
+              <img src='logo.svg' alt='Coffeline' width={100} height={40} />
             </Link>
 
             <button
