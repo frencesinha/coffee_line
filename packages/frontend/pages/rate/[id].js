@@ -122,7 +122,7 @@ function Rate() {
 function RateSubjects() {
   const subjects = ['Aroma', 'Acidity', 'Body', 'Flavor', 'Aftertaste'];
   return subjects.map((subject) => (
-    <div className='box'>
+    <div key={subject} className='box'>
       <div className='container_text_box'>
         <p>{subject}</p>
         <i className='bi bi-star'></i>

@@ -101,7 +101,7 @@ function CoffeeNew() {
             <div className='container_text_box'>
               <form className='form-info'>
                 <div className='form-group'>
-                  <label for='Date'>Harvest date</label>
+                  <label htmlFor='Date'>Harvest date</label>
                   <input
                     type='date'
                     className='form-control'
@@ -110,7 +110,7 @@ function CoffeeNew() {
                 </div>
 
                 <div className='form-group'>
-                  <label for='Process'>Process</label>
+                  <label htmlFor='Process'>Process</label>
                   <select
                     className='form-control'
                     id='exampleFormControlSelect1'
@@ -124,7 +124,7 @@ function CoffeeNew() {
                 </div>
 
                 <div className='form-group'>
-                  <label for='CoffeeBean'>Coffee Bean</label>
+                  <label htmlFor='CoffeeBean'>Coffee Bean</label>
                   <select
                     className='form-control'
                     id='exampleFormControlSelect1'
@@ -138,7 +138,7 @@ function CoffeeNew() {
                 </div>
 
                 <div className='form-group'>
-                  <label for='Varietal'>Specific varietal</label>
+                  <label htmlFor='Varietal'>Specific varietal</label>
                   <input
                     type='word'
                     className='form-control'
@@ -148,7 +148,7 @@ function CoffeeNew() {
                 </div>
 
                 <div className='form-group'>
-                  <label for='Weight'>Weight (in kg)</label>
+                  <label htmlFor='Weight'>Weight (in kg)</label>
                   <input
                     type='number'
                     className='form-control'
@@ -158,7 +158,7 @@ function CoffeeNew() {
                 </div>
 
                 <div className='form-group'>
-                  <label for='exampleFormControlTextarea1'>Notes</label>
+                  <label htmlFor='exampleFormControlTextarea1'>Notes</label>
                   <textarea
                     className='form-control'
                     id='exampleFormControlTextarea1'
