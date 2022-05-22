@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
@@ -17,9 +16,9 @@ function App() {
       <div className='container'>
         <nav className='navbar fixed-top'>
           <div className='container'>
-            <Link href='/' className='logo'>
+            <a href='/' className='logo'>
               <img src='logo.svg' alt='Coffeline' width={100} height={40} />
-            </Link>
+            </a>
 
             <button
               className='navbar-toggler'
@@ -95,9 +94,9 @@ function App() {
             Check the <span>history</span> of your special coffee.
           </h2>
 
-          <Link href='/scan'>
+          <a href='/scan'>
             <div className='scan' />
-          </Link>
+          </a>
 
           <p className='small-caption'>Scan QR code</p>
         </section>
