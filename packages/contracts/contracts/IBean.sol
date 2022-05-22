@@ -33,6 +33,7 @@ interface IBean {
 
     struct SellPosition {
         uint256 weightInKg;
+        uint256 price;
         string phoneNumber;
         bool sold;
         uint256 timestamp;
