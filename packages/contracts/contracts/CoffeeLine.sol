@@ -26,7 +26,6 @@ contract CoffeeLine is ICoffeeLine {
 
     function createProducer(ProducerParams calldata _params)
         external
-        override(ICoffeeLine)
         returns (Producer memory producer)
     {
         require(!_producerExists(), "Producer already exists");
@@ -54,7 +53,6 @@ contract CoffeeLine is ICoffeeLine {
 
     function createBean(BeanParams calldata _params)
         external
-        override(ICoffeeLine)
         returns (Bean bean)
     {
         require(_producerExists(), "Producer does not exist");
@@ -74,7 +72,6 @@ contract CoffeeLine is ICoffeeLine {
 
     function createRoaster(RoasterParams calldata _params)
         external
-        override(ICoffeeLine)
         returns (Roaster memory roaster)
     {
         require(!_roasterExists(msg.sender), "Roaster already exists");
