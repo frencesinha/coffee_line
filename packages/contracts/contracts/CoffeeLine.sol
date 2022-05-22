@@ -57,7 +57,7 @@ contract CoffeeLine is ICoffeeLine {
         override(ICoffeeLine)
         returns (Bean bean)
     {
-        require(!_producerExists(), "Producer does not exist");
+        require(_producerExists(), "Producer does not exist");
 
         bean = new Bean(
             msg.sender,
@@ -98,6 +98,14 @@ contract CoffeeLine is ICoffeeLine {
         roasters[msg.sender] = roaster;
     }
 
+    function getRoasterMobileNumber(address _roaster)
+        external
+        view
+        returns (string memory)
+    {
+        return roasters[_roaster].mobileNumber;
+    }
+
     function acquireBean(Bean _bean) external {
         require(_roasterExists(tx.origin), "Roaster does not exist");
 
@@ -110,11 +118,11 @@ contract CoffeeLine is ICoffeeLine {
         uint256 beansLength = roasters[msg.sender].beans.length;
 
         for (uint256 index = 0; index < beansLength; index++) {
-          if (_params.bean == roasters[msg.sender].beans[index]) {
-            Coffee coffee = new Coffee(_params, msg.sender);
-            roasters[msg.sender].coffees.push(coffee);
-            break;
-          }
+            if (_params.bean == roasters[msg.sender].beans[index]) {
+                Coffee coffee = new Coffee(_params, msg.sender);
+                roasters[msg.sender].coffees.push(coffee);
+                break;
+            }
         }
     }
 

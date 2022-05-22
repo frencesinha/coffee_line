@@ -7,55 +7,54 @@ import "./IBean.sol";
 import "./ICoffeeLine.sol";
 
 contract Coffee is ICoffee {
-  ///
-  /// state
-  ///
+    ///
+    /// state
+    ///
 
-  string coffeeName;
-  ICoffee.Origin originType;
-  Bean bean;
-  ICoffee.RoastType roastType;
+    string coffeeName;
+    ICoffee.Origin originType;
+    Bean bean;
+    ICoffee.RoastType roastType;
 
-  address owner;
+    address owner;
 
-  mapping(address => Review) reviews;
+    mapping(address => Review) reviews;
 
-  Timeline timeline;
+    Timeline timeline;
 
-  ///
-  /// constructor
-  ///
+    ///
+    /// constructor
+    ///
 
-  constructor(ICoffeeLine.RoastParams memory _params, address _owner) {
-    coffeeName = _params.coffeeName;
-    originType = _params.originType;
-    bean = _params.bean;
-    roastType = _params.roastType;
+    constructor(ICoffeeLine.RoastParams memory _params, address _owner) {
+        coffeeName = _params.coffeeName;
+        originType = _params.originType;
+        bean = _params.bean;
+        roastType = _params.roastType;
 
-    owner = _owner;
+        owner = _owner;
 
-    IBean.Timeline memory timelineTmp = bean.getTimeline(owner);
-    timeline = Timeline({
-      creationDate: timelineTmp.creationDate,
-      sellDate: timelineTmp.sellDate,
-      acquisitionDate: timelineTmp.acquisitionDate,
-      roastDate: block.timestamp
-    });
-  }
+        IBean.Timeline memory timelineTmp = bean.getTimeline(owner);
+        timeline = Timeline({
+            creationDate: timelineTmp.creationDate,
+            sellDate: timelineTmp.sellDate,
+            acquisitionDate: timelineTmp.acquisitionDate,
+            roastDate: block.timestamp
+        });
+    }
 
-  ///
-  /// Public API
-  ///
+    ///
+    /// Public API
+    ///
 
-  function review(Review calldata _params) external {
-    require(msg.sender != owner, "Owner cannot review");
-    require(reviews[msg.sender].aroma == 0, "Review already exists");
+    function review(Review calldata _params) external {
+        require(msg.sender != owner, "Owner cannot review");
+        require(reviews[msg.sender].aroma == 0, "Review already exists");
 
-    reviews[msg.sender] = _params;
-  }
+        reviews[msg.sender] = _params;
+    }
 
-  function getTimeline() external view returns(Timeline memory timelineRes) {
-    timelineRes = timeline;
-  }
- 
+    function getTimeline() external view returns (Timeline memory timelineRes) {
+        timelineRes = timeline;
+    }
 }

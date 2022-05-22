@@ -28,13 +28,12 @@ interface IBean {
     }
 
     struct Acquisition {
-        uint256 amount;
         uint256 timestamp;
     }
 
     struct SellPosition {
         uint256 weightInKg;
-        address roaster;
+        string phoneNumber;
         bool sold;
         uint256 timestamp;
     }

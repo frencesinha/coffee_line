@@ -22,7 +22,7 @@ contract Bean is IBean {
 
     uint256 remainderWeightInKg;
 
-    mapping(address => SaleDetails) sales;
+    mapping(string => SaleDetails) sales;
 
     ///
     /// Constructor
@@ -60,7 +60,7 @@ contract Bean is IBean {
     /// Public API
     ///
 
-    function sellTo(address _to, uint256 _amount) external {
+    function sellTo(string memory _phoneNumber, uint256 _amount) external {
         require(msg.sender == producer, "Only the producer can sell its Bean");
         require(_amount > 0, "The amount should be significant");
         require(
@@ -70,35 +70,37 @@ contract Bean is IBean {
 
         SellPosition memory position = SellPosition({
             weightInKg: _amount,
-            roaster: _to,
+            phoneNumber: _phoneNumber,
             sold: false,
             timestamp: block.timestamp
         });
 
-        sales[_to].sellPosition = position;
+        sales[_phoneNumber].sellPosition = position;
 
         remainderWeightInKg -= _amount;
     }
 
-    function acquireBean(uint256 _amount) external {
-        require(_amount > 0, "The payable amount should be greater than 0");
+    function acquireBean() external {
+        string memory mobileNumber = coffeeLine.getRoasterMobileNumber(
+            msg.sender
+        );
+
         require(
-            sales[msg.sender].sellPosition.weightInKg > 0,
+            sales[mobileNumber].sellPosition.weightInKg > 0,
             "Sell Position does not exist"
         );
         require(
-            !sales[msg.sender].sellPosition.sold,
+            !sales[mobileNumber].sellPosition.sold,
             "Position is already sold"
         );
 
         Acquisition memory acquisition = Acquisition({
-            amount: _amount,
             timestamp: block.timestamp
         });
 
-        sales[msg.sender].acquisition = acquisition;
+        sales[mobileNumber].acquisition = acquisition;
 
-        SellPosition storage position = sales[msg.sender].sellPosition;
+        SellPosition storage position = sales[mobileNumber].sellPosition;
         position.sold = true;
     }
 
@@ -116,11 +118,15 @@ contract Bean is IBean {
         view
         returns (Timeline memory)
     {
+        string memory mobileNumber = coffeeLine.getRoasterMobileNumber(
+            _roaster
+        );
+
         return
             Timeline({
                 creationDate: creationDate,
-                sellDate: sales[_roaster].sellPosition.timestamp,
-                acquisitionDate: sales[_roaster].acquisition.timestamp
+                sellDate: sales[mobileNumber].sellPosition.timestamp,
+                acquisitionDate: sales[mobileNumber].acquisition.timestamp
             });
     }
 }

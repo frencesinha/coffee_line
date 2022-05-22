@@ -22,11 +22,11 @@ interface ICoffee {
     ///
 
     struct Review {
-      uint8 aroma;
-      uint8 acidity;
-      uint8 body;
-      uint8 flavor;
-      uint8 aftertaste;
+        uint8 aroma;
+        uint8 acidity;
+        uint8 body;
+        uint8 flavor;
+        uint8 aftertaste;
     }
 
     struct Timeline {
