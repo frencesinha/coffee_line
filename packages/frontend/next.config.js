@@ -9,8 +9,4 @@ module.exports = {
     };
     return config;
   },
-  images: {
-    loader: 'imgix',
-    path: '',
-  },
 };
