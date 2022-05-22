@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 import Head from 'next/head';
-import '../styles/globals.css';
+import '../public/globals.css';
 
 export default function MyApp({ Component, pageProps }) {
   return (
