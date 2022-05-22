@@ -8,8 +8,7 @@ import "./CoffeeLine.sol";
 import "./IBean.sol";
 
 contract Bean is IBean {
-
-  using SafeERC20 for IERC20;
+    using SafeERC20 for IERC20;
 
     ///
     /// constants
@@ -73,7 +72,11 @@ contract Bean is IBean {
     /// Public API
     ///
 
-    function sellTo(string memory _phoneNumber, uint256 _weightInKg, uint256 _price) external {
+    function sellTo(
+        string memory _phoneNumber,
+        uint256 _weightInKg,
+        uint256 _price
+    ) external {
         require(msg.sender == producer, "Only the producer can sell its Bean");
         require(_weightInKg > 0, "The amount should be significant");
         require(
@@ -111,7 +114,11 @@ contract Bean is IBean {
 
         require(_token == cEUR || _token == cUSD, "token is not cEUR or cUSD");
 
-        IERC20(_token).safeTransferFrom(msg.sender, producer, sales[mobileNumber].sellPosition.price);
+        IERC20(_token).safeTransferFrom(
+            msg.sender,
+            producer,
+            sales[mobileNumber].sellPosition.price
+        );
 
         Acquisition memory acquisition = Acquisition({
             timestamp: block.timestamp

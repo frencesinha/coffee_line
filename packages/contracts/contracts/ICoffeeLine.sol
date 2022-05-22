@@ -78,18 +78,4 @@ interface ICoffeeLine {
         Bean bean;
         ICoffee.RoastType roastType;
     }
-
-    ///
-    /// Public API
-    ///
-
-    function createProducer(ProducerParams calldata _producer)
-        external
-        returns (Producer memory);
-
-    function createBean(BeanParams calldata _bean) external returns (Bean);
-
-    function createRoaster(RoasterParams calldata _bean)
-        external
-        returns (Roaster memory);
 }

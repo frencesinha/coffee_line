@@ -96,6 +96,16 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    alfajores: {
+      url: "https://alfajores-forno.celo-testnet.org",
+      accounts: [process.env.PRIVATE_KEY!],
+      chainId: 44787,
+    },
+    celo: {
+      url: "https://forno.celo.org",
+      accounts: [process.env.PRIVATE_KEY!],
+      chainId: 42220,
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
