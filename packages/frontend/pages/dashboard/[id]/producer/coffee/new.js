@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useContractKit } from '@celo-tools/use-contractkit';
 import { ContractKitProvider } from '@celo-tools/use-contractkit';
 import '@celo-tools/use-contractkit/lib/styles.css';
+import axios from 'axios';
 
 function CoffeeNew() {
   const router = useRouter();
@@ -185,13 +186,14 @@ function CoffeeNew() {
                     type='file'
                     className='form-control-file'
                     id='upload'
+                    accept='image/png, image/jpeg'
                   />
                 </div>
               </form>
             </div>
           </div>
 
-          {!address && (
+          {address && (
             <button
               onClick={() => connect().catch((e) => console.log(e))}
               className='primary-button col-12'
@@ -200,16 +202,51 @@ function CoffeeNew() {
             </button>
           )}
 
-          {address && (
+          {!address && (
             // TODO: This link should redirect to the newly created coffee qr code
-            <Link href={'/qr/' + id}>
-              <button className='primary-button col-12'>Submit</button>
-            </Link>
+            <button
+              onClick={() => newCoffee()}
+              className='primary-button col-12'
+            >
+              Submit
+            </button>
           )}
         </section>
       </div>
     </>
   );
+}
+
+export function newCoffee() {
+  uploadPictureToStorj();
+}
+
+async function uploadPictureToStorj() {
+  var files = document.getElementById('upload').files;
+
+  if (files.length > 0) {
+    var bodyFormData = new FormData();
+
+    bodyFormData.append('file', files[0]);
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000',
+      data: bodyFormData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .then(function (response) {
+        //handle success
+        window.alert(
+          'Storj: https://demo.storj-ipfs.com/ipfs/' + response.data.Hash
+        );
+        console.log(response);
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+  }
 }
 
 function WrappedCoffeeNew() {
